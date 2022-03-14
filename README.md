@@ -18,3 +18,8 @@ Updated @March 1st, 2022:
   Progress update:
   
   ░░░░░ 20%
+
+
+
+Project Description:
+ To develop particle radiography for online image guidance in lung cancer PT, as it can provide both lateral and longitudinal information on the tumour position. Define the accuracy requirements placed on particle radiography for accurate online tumour tracking using a well-established treatment planning software. Result expects to achieve optimal accuracy while minimizing patient dose and acquisition time.
