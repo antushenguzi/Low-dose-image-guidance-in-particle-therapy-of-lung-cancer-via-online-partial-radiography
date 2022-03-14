@@ -172,5 +172,5 @@ private:
      
 };
 
-#endif // CAMERAWINDOW_H
+#endif // CAMERAWINDOW_
 
