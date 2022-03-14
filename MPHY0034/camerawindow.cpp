@@ -24,21 +24,21 @@ CameraWindow::CameraWindow(QWidget* parent) :
     LabelSingleImg = ui->label_SampleImg;//这两个指针的赋值务必放在setupUi的后面，否则前面没有对应的指针，就是空的
     LabelSingleImg->setScaledContents(true);//设置比例
 
-    //下面为实时采集图部分
-    pDrawWidget = ui->widget_CurInput;//用于绘制实时图的时候使用，使用drawimage来绘图
+    //实时
+    pDrawWidget = ui->widget_CurInput;
     pDrawWidget->SetSize();
-    //LabelShowCurImg->hide();//使用label进行显示实时图时，将这段注释取消。
+    //LabelShowCurImg->hide();
 
-    ui->lineEdit_ExplosureTime->setText("50000");//设置默认曝光参数
-    ui->lineEdit_FpsSet->setText("8");//设置默认增益
-    ui->lineEdit_FilePath->setText(".\\data");//设置默认保存路径，在当前目录下建立一个data文件夹
-    ui->lineEdit_CamIndex->setText("1");//相机序号默认为1
+    ui->lineEdit_ExplosureTime->setText("50000");
+    ui->lineEdit_FpsSet->setText("8");
+    ui->lineEdit_FilePath->setText(".\\data");
+    ui->lineEdit_CamIndex->setText("1");//序号
     ui->lineEdit_FileName->setText("test.bmp");
 
-    this->CamWinParamsSet(800, 800, 100, 30);//设置界面窗口与部件宽高
-    this->GeoSetWidgetCurInput(100, 100, 400, 400);//设置实时窗口参数
-    this->GeoSetWidgetSampleImg(600, 600,400, 400);//设置采集窗口参数
-    this->GeoSetFrameParamsSet(100, 910, 500, 100, 10, 10);//设置参数框几何参数
+    this->CamWinParamsSet(800, 800, 100, 30);//窗口
+    this->GeoSetWidgetCurInput(100, 100, 400, 400);//实时参数
+    this->GeoSetWidgetSampleImg(600, 600,400, 400);//采集参数
+    this->GeoSetFrameParamsSet(100, 910, 500, 100, 10, 10);//参数框参数
 }
 
 CameraWindow::~CameraWindow()
@@ -49,7 +49,7 @@ CameraWindow::~CameraWindow()
 
 /* **************************************图形界面几何设计***********************************************/
 
-//设置界面小部件的宽高参数
+//宽高
 void CameraWindow::CamWinParamsSet(int _WidgetW, int _WidgetH, int _SmallPartW, int _SmallPartH)
 {
      
@@ -64,36 +64,25 @@ void CameraWindow::CamWinParamsSet(int _WidgetW, int _WidgetH, int _SmallPartW, 
 }
 
 
-//设置实时采集widget
+//实时widget
 void CameraWindow::GeoSetWidgetCurInput(int _x, int _y, int _width, int _height)
 {
 
-    //函数作用：设置相机窗口中的实时采集图像框的几何尺寸
-    //输入：widget的起始位置x，y，以及widget的大小
-    //设置对象：包含外框widget部分以及label部分的
-    //设置变量：widget和label的位置和大小
-    //设置要求：label和widget大小相同，起始位置也相同
 
-    //设置widget
+ 
     ui->widget_CurInput->move(_x, _y);
     ui->widget_CurInput->resize(_width, _height);
 
-    //设置label
+ 
     ui->label_CurInput->move(0, 0);
     ui->label_CurInput->resize(_width, _height);
 }
 
-//设置单帧采集widget
 void CameraWindow::GeoSetWidgetSampleImg(int _x, int _y, int _width, int _height)
 {
 
-    //函数作用：设置相机窗口中的单帧采集图像框的几何尺寸
-    //输入：widget的起始位置x，y，以及widget的大小
-    //设置对象：包含外框widget部分以及label部分的
-    //设置变量：widget和label的位置和大小
-    //设置要求：label和widget大小相同，起始位置也相同
 
-    //设置widget
+
     ui->widget_SampleImg->move(_x, _y);
     ui->widget_SampleImg->resize(_width, _height);
 
@@ -102,34 +91,34 @@ void CameraWindow::GeoSetWidgetSampleImg(int _x, int _y, int _width, int _height
     ui->label_SampleImg->resize(_width, _height);
 }
 
-//设置参数框
+//参数框
 void CameraWindow::GeoSetFrameParamsSet(int _x, int _y, int _width, int _height, int _dx, int _dy)
 {
 
     ui->frame_ParmsSet->move(_x, _y);
     ui->frame_ParmsSet->resize(_width, _height);
 
-    ui->label_ExplosureTime->move(_dx, _dy);//框内第一行，第一列
+    ui->label_ExplosureTime->move(_dx, _dy);
     ui->label_ExplosureTime->resize(CwParas.LabelWidth, CwParas.LabelHeight);
-    ui->label_FpsSet->move(_dx, 2 * _dy + CwParas.LabelHeight);//框内第二行，第一列
+    ui->label_FpsSet->move(_dx, 2 * _dy + CwParas.LabelHeight);
     ui->label_FpsSet->resize(CwParas.LabelWidth, CwParas.LabelHeight);
 
-    ui->lineEdit_ExplosureTime->move(2 * _dx + CwParas.LabelWidth, _dy);//框内第一行，第二列
+    ui->lineEdit_ExplosureTime->move(2 * _dx + CwParas.LabelWidth, _dy);
     ui->lineEdit_ExplosureTime->resize(CwParas.LineeditWidth, CwParas.LineeditHeight);
-    ui->lineEdit_FpsSet->move(2 * _dx + CwParas.LabelWidth, 2 * _dy + CwParas.LabelHeight);//框内第二行，第二列
+    ui->lineEdit_FpsSet->move(2 * _dx + CwParas.LabelWidth, 2 * _dy + CwParas.LabelHeight);
     ui->lineEdit_FpsSet->resize(CwParas.LineeditWidth, CwParas.LineeditHeight);
 
-    ui->pushButton_ParamsSet->move(3 * _dx + CwParas.LabelWidth + CwParas.LabelWidth, 2 * _dy + CwParas.LabelHeight);//框内第二行第三列
+    ui->pushButton_ParamsSet->move(3 * _dx + CwParas.LabelWidth + CwParas.LabelWidth, 2 * _dy + CwParas.LabelHeight);
     ui->pushButton_ParamsSet->resize(CwParas.LineeditWidth, CwParas.LineeditHeight);
 }
 
-//设置操作框
+//操作框
 void CameraWindow::GeoSetFrameCamOperate()
 {
 
 }
 
-//设置抬头框
+//抬头框
 void CameraWindow::GeoSetFrameWinInfo()
 {
 
@@ -220,7 +209,7 @@ void CameraWindow::on_pushButton_StopGrab_clicked()
     }
     catch (CGalaxyException)
     {
-        QMessageBox::information(this, "提示", "停止采集按钮报错，请先枚举设备，再打开相机");
+        QMessageBox::information(this, "Warning", "STOP, please turn on the camera and try again");
     }
 }
 
